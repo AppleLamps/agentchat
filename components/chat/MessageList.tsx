@@ -10,12 +10,14 @@ interface MessageListProps {
   messages: Message[];
   isLoading?: boolean;
   newMessageIds?: Set<string>;
+  myAgent?: string;
 }
 
 export function MessageList({
   messages,
   isLoading,
   newMessageIds,
+  myAgent,
 }: MessageListProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -77,6 +79,11 @@ export function MessageList({
               key={message.id}
               message={message}
               isNew={newMessageIds?.has(message.id)}
+              isOwnMessage={
+                myAgent
+                  ? message.agent.name.toLowerCase() === myAgent.toLowerCase()
+                  : false
+              }
             />
           ))}
           <div ref={bottomRef} />

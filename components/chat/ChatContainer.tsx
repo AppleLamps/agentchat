@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import useSWR from "swr";
 import { RoomHeader } from "./RoomHeader";
 import { MessageList } from "./MessageList";
 import { AgentSidebar } from "./AgentSidebar";
+import { useMyAgent } from "@/components/SettingsPopover";
 import type { Message } from "./MessageBubble";
 
 interface RoomData {
@@ -40,6 +41,7 @@ export function ChatContainer() {
   const [newMessageIds, setNewMessageIds] = useState<Set<string>>(new Set());
   const [lastCursor, setLastCursor] = useState<string | null>(null);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
+  const { myAgent, saveMyAgent } = useMyAgent();
 
   // Fetch initial messages
   const { data: initialData, error: initialError } = useSWR<RoomData>(
@@ -48,7 +50,7 @@ export function ChatContainer() {
     {
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
-    }
+    },
   );
 
   // Poll for new messages every 5 seconds
@@ -60,7 +62,7 @@ export function ChatContainer() {
     {
       refreshInterval: 5000,
       revalidateOnFocus: false,
-    }
+    },
   );
 
   // Fetch agents for sidebar
@@ -70,7 +72,7 @@ export function ChatContainer() {
     {
       refreshInterval: 30000, // Refresh every 30 seconds
       revalidateOnFocus: false,
-    }
+    },
   );
 
   // Handle initial data load
@@ -81,7 +83,7 @@ export function ChatContainer() {
         setLastCursor(initialData.next_cursor);
       } else if (initialData.messages.length > 0) {
         setLastCursor(
-          initialData.messages[initialData.messages.length - 1].created_at
+          initialData.messages[initialData.messages.length - 1].created_at,
         );
       }
       setIsInitialLoad(false);
@@ -98,7 +100,7 @@ export function ChatContainer() {
         setLastCursor(pollData.next_cursor);
       } else {
         setLastCursor(
-          pollData.messages[pollData.messages.length - 1].created_at
+          pollData.messages[pollData.messages.length - 1].created_at,
         );
       }
 
@@ -110,11 +112,12 @@ export function ChatContainer() {
   }, [pollData]);
 
   // Transform agents data for sidebar
-  const agents = agentsResponse?.agents?.map((agent) => ({
-    id: agent.id,
-    name: agent.name,
-    isOnline: isAgentOnline(agent.last_active_at),
-  })) || [];
+  const agents =
+    agentsResponse?.agents?.map((agent) => ({
+      id: agent.id,
+      name: agent.name,
+      isOnline: isAgentOnline(agent.last_active_at),
+    })) || [];
 
   const onlineCount = agents.filter((a) => a.isOnline).length;
 
@@ -130,11 +133,14 @@ export function ChatContainer() {
           description={roomDescription}
           onlineCount={onlineCount}
           isLive={true}
+          myAgent={myAgent}
+          onMyAgentChange={saveMyAgent}
         />
         <MessageList
           messages={messages}
           isLoading={isInitialLoad && !initialError}
           newMessageIds={newMessageIds}
+          myAgent={myAgent}
         />
       </div>
       <AgentSidebar agents={agents} isLoading={!agentsResponse} />

@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { JoinDialog } from "@/components/JoinDialog";
+import { SettingsPopover } from "@/components/SettingsPopover";
 import { Hash, Users, Eye } from "lucide-react";
 
 interface RoomHeaderProps {
@@ -11,6 +12,8 @@ interface RoomHeaderProps {
   description?: string;
   onlineCount?: number;
   isLive?: boolean;
+  myAgent?: string;
+  onMyAgentChange?: (name: string) => void;
 }
 
 export function RoomHeader({
@@ -18,6 +21,8 @@ export function RoomHeader({
   description,
   onlineCount = 0,
   isLive = true,
+  myAgent = "",
+  onMyAgentChange,
 }: RoomHeaderProps) {
   return (
     <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -49,6 +54,9 @@ export function RoomHeader({
             <Eye className="h-4 w-4" />
             <span>Spectator Mode</span>
           </div>
+          {onMyAgentChange && (
+            <SettingsPopover myAgent={myAgent} onSave={onMyAgentChange} />
+          )}
           <ThemeToggle />
         </div>
       </div>

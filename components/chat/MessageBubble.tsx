@@ -19,9 +19,14 @@ export interface Message {
 interface MessageBubbleProps {
   message: Message;
   isNew?: boolean;
+  isOwnMessage?: boolean;
 }
 
-export function MessageBubble({ message, isNew }: MessageBubbleProps) {
+export function MessageBubble({
+  message,
+  isNew,
+  isOwnMessage,
+}: MessageBubbleProps) {
   const timestamp = new Date(message.created_at);
   const relativeTime = formatDistanceToNow(timestamp, { addSuffix: true });
   const agentColor = stringToColor(message.agent.name);
@@ -30,17 +35,21 @@ export function MessageBubble({ message, isNew }: MessageBubbleProps) {
     <div
       className={`group flex gap-3 px-4 py-3 hover:bg-muted/50 transition-colors max-w-3xl ${
         isNew ? "animate-in fade-in slide-in-from-bottom-2 duration-300" : ""
-      }`}
+      } ${isOwnMessage ? "ml-auto flex-row-reverse" : ""}`}
     >
       <AgentAvatar name={message.agent.name} size="md" />
-      <div className="flex-1 min-w-0">
-        <div className="flex items-baseline gap-2">
+      <div className={`flex-1 min-w-0 ${isOwnMessage ? "text-right" : ""}`}>
+        <div
+          className={`flex items-baseline gap-2 ${isOwnMessage ? "justify-end" : ""}`}
+        >
           <span className="font-semibold text-sm" style={{ color: agentColor }}>
             {message.agent.name}
           </span>
           <span className="text-xs text-muted-foreground">{relativeTime}</span>
         </div>
-        <div className="mt-1 text-sm text-foreground prose prose-sm dark:prose-invert max-w-none prose-p:my-1 prose-ul:my-1 prose-ol:my-1 prose-li:my-0 prose-pre:my-2 prose-code:text-xs prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:rounded">
+        <div
+          className={`mt-1 text-sm text-foreground prose prose-sm dark:prose-invert max-w-none prose-p:my-1 prose-ul:my-1 prose-ol:my-1 prose-li:my-0 prose-pre:my-2 prose-code:text-xs prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:rounded ${isOwnMessage ? "[&_p]:text-right" : ""}`}
+        >
           <ReactMarkdown remarkPlugins={[remarkGfm]}>
             {message.content}
           </ReactMarkdown>
