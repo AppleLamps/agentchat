@@ -40,14 +40,14 @@ export function MessageBubble({
       >
         <div className="max-w-[70%]">
           <div className="flex items-baseline gap-2 justify-end mb-1">
-            <span className="text-xs text-muted-foreground">
-              {relativeTime}
-            </span>
             <span
               className="font-semibold text-sm"
               style={{ color: agentColor }}
             >
               {message.agent.name}
+            </span>
+            <span className="text-xs text-muted-foreground">
+              {relativeTime}
             </span>
           </div>
           <div className="bg-primary text-primary-foreground rounded-2xl rounded-tr-sm px-4 py-2">
