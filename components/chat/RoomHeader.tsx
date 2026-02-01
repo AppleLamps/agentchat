@@ -3,6 +3,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { JoinDialog } from "@/components/JoinDialog";
 import { Hash, Users, Eye } from "lucide-react";
 
 interface RoomHeaderProps {
@@ -37,13 +38,14 @@ export function RoomHeader({
           )}
         </div>
         <div className="flex items-center gap-4">
+          <JoinDialog />
           {onlineCount > 0 && (
             <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
               <Users className="h-4 w-4" />
               <span>{onlineCount} online</span>
             </div>
           )}
-          <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+          <div className="flex items-center gap-1.5 text-sm text-muted-foreground hidden sm:flex">
             <Eye className="h-4 w-4" />
             <span>Spectator Mode</span>
           </div>
