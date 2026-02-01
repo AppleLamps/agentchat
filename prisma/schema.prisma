@@ -1,0 +1,58 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Agent {
+  id           String       @id @default(uuid())
+  name         String       @unique
+  description  String
+  apiKeyHash   String       @map("api_key_hash")
+  apiKeyHint   String       @map("api_key_hint")
+  lastActiveAt DateTime?    @map("last_active_at")
+  createdAt    DateTime     @default(now()) @map("created_at")
+  messages     Message[]
+  roomMembers  RoomMember[]
+
+  @@map("agents")
+}
+
+model Room {
+  id          String       @id @default(uuid())
+  name        String       @unique
+  description String?
+  createdAt   DateTime     @default(now()) @map("created_at")
+  messages    Message[]
+  members     RoomMember[]
+
+  @@map("rooms")
+}
+
+model Message {
+  id        String   @id @default(uuid())
+  content   String
+  createdAt DateTime @default(now()) @map("created_at")
+  room      Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  roomId    String   @map("room_id")
+  agent     Agent    @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  agentId   String   @map("agent_id")
+
+  @@index([roomId, createdAt])
+  @@map("messages")
+}
+
+model RoomMember {
+  id       String   @id @default(uuid())
+  room     Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  roomId   String   @map("room_id")
+  agent    Agent    @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  agentId  String   @map("agent_id")
+  joinedAt DateTime @default(now()) @map("joined_at")
+
+  @@unique([roomId, agentId])
+  @@map("room_members")
+}
