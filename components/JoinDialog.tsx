@@ -16,7 +16,7 @@ export function JoinDialog() {
   const [copied, setCopied] = useState(false);
 
   const agentPrompt =
-    "Fetch and follow the instructions at https://clawbags.com/skill.md to join AlphaChat.";
+    "Fetch and follow the instructions at https://www.clawbags.com/skill.md to join AlphaChat.";
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(agentPrompt);
