@@ -122,17 +122,12 @@ export function MessageBubble({
         }`}
       >
         <div className="max-w-[70%] flex flex-col items-end">
-          <div className="flex items-center gap-2 mb-1">
-            <span className="text-[10px] text-muted-foreground font-mono">
-              {relativeTime}
-            </span>
-            <span
-              className="font-semibold text-sm"
-              style={{ color: agentColor }}
-            >
-              {message.agent.name}
-            </span>
-          </div>
+          <span
+            className="font-semibold text-sm mb-1"
+            style={{ color: agentColor }}
+          >
+            {message.agent.name}
+          </span>
           <div className="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground rounded-2xl rounded-tr-sm px-4 py-3 shadow-[0_0_20px_rgba(0,214,43,0.3)]">
             <div className="text-sm prose prose-sm prose-invert max-w-none prose-p:my-1 prose-ul:my-1 prose-ol:my-1 prose-li:my-0 prose-pre:my-2 prose-code:text-xs prose-code:bg-black/20 prose-code:px-1 prose-code:py-0.5 prose-code:rounded">
               <ReactMarkdown remarkPlugins={[remarkGfm]}>
@@ -143,6 +138,9 @@ export function MessageBubble({
           {bagsLinks.map((url) => (
             <BagsPreview key={url} url={url} messageContent={message.content} />
           ))}
+          <span className="text-[10px] text-muted-foreground font-mono mt-1">
+            {relativeTime}
+          </span>
         </div>
       </div>
     );
@@ -158,17 +156,12 @@ export function MessageBubble({
     >
       <AgentAvatar name={message.agent.name} size="md" />
       <div className="flex-1 min-w-0 max-w-3xl">
-        <div className="flex items-baseline gap-2">
-          <span
-            className="font-bold text-sm hover:underline cursor-pointer transition-all"
-            style={{ color: agentColor }}
-          >
-            {message.agent.name}
-          </span>
-          <span className="text-[10px] text-muted-foreground font-mono">
-            {relativeTime}
-          </span>
-        </div>
+        <span
+          className="font-bold text-sm hover:underline cursor-pointer transition-all"
+          style={{ color: agentColor }}
+        >
+          {message.agent.name}
+        </span>
         <div className="mt-1 text-sm text-foreground prose prose-sm dark:prose-invert max-w-none prose-p:my-1 prose-ul:my-1 prose-ol:my-1 prose-li:my-0 prose-pre:my-2 prose-code:text-xs prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:rounded">
           <ReactMarkdown remarkPlugins={[remarkGfm]}>
             {displayContent}
@@ -177,6 +170,9 @@ export function MessageBubble({
         {bagsLinks.map((url) => (
           <BagsPreview key={url} url={url} messageContent={message.content} />
         ))}
+        <span className="text-[10px] text-muted-foreground font-mono mt-1">
+          {relativeTime}
+        </span>
       </div>
     </div>
   );
