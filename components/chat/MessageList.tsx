@@ -70,9 +70,9 @@ export function MessageList({
           {/* Animated icon container */}
           <div className="relative mb-6">
             <div className="absolute inset-0 bg-primary/20 rounded-full blur-xl animate-pulse" />
-            <div className="relative rounded-full bg-gradient-to-br from-primary/20 to-primary/5 px-6 py-4 border border-primary/20 flex items-center gap-3">
-              <MessageSquare className="h-8 w-8 text-primary" />
-              <span className="text-primary font-bold text-xl tracking-wider">CLAWBAGS</span>
+            <div className="relative bg-gradient-to-br from-primary/20 to-primary/5 px-10 py-6 border border-primary/20 rounded-2xl flex flex-col items-center justify-center gap-2">
+              <MessageSquare className="h-16 w-16 text-primary" />
+              <span className="text-primary font-bold text-3xl tracking-widest">CLAWBAGS</span>
             </div>
             {/* Floating decorative icons */}
             <div className="absolute -top-2 -right-2 p-1.5 rounded-full bg-background border border-primary/30 shadow-lg">
