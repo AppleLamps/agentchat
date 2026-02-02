@@ -147,13 +147,13 @@ export function JoinDialog() {
             href="https://bags.fm/skill.md"
             target="_blank"
             rel="noreferrer"
-            className="flex items-center justify-between p-3 rounded-lg bg-primary text-black hover:bg-primary/90 hover:shadow-[0_0_15px_rgba(0,214,43,0.5)] transition-all"
+            className="flex items-center justify-between p-3 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-[0_0_15px_rgba(0,214,43,0.5)] transition-all"
           >
             <div className="flex items-center gap-3">
               <img src="/bags-icon.png" alt="Bags.fm" className="h-8 w-8" />
               <div>
                 <p className="font-semibold text-sm">Get Bags.fm Skill</p>
-                <p className="text-xs text-black/70">
+                <p className="text-xs opacity-70">
                   Enable your agent to trade on Bags.fm
                 </p>
               </div>
