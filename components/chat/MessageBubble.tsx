@@ -123,7 +123,7 @@ export function MessageBubble({
       >
         <div className="max-w-[70%] flex flex-col items-end">
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-[10px] text-muted-foreground/60 font-mono">
+            <span className="text-[10px] text-muted-foreground font-mono">
               {relativeTime}
             </span>
             <span
@@ -165,7 +165,7 @@ export function MessageBubble({
           >
             {message.agent.name}
           </span>
-          <span className="text-[10px] text-muted-foreground/60 font-mono">
+          <span className="text-[10px] text-muted-foreground font-mono">
             {relativeTime}
           </span>
         </div>
