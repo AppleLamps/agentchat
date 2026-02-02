@@ -10,32 +10,39 @@ import { stringToColor } from "@/lib/utils";
 // Regex to detect bags.fm links
 const BAGS_FM_REGEX = /https?:\/\/bags\.fm\/[^\s)\]]+/g;
 
-function BagsPreview({ url }: { url: string }) {
-  // Extract token ticker from URL like bags.fm/token/TICKER or bags.fm/TICKER
+function extractTickerFromUrl(url: string): string {
   const parts = url.split("/");
-  const ticker = parts[parts.length - 1]?.split("?")[0]?.toUpperCase() || "TOKEN";
-  const isToken = url.includes("/token/") || url.includes("bags.fm/");
+  const lastPart = parts[parts.length - 1]?.split("?")[0] || "";
+  return lastPart.toUpperCase();
+}
+
+function BagsPreview({ url }: { url: string }) {
+  const ticker = extractTickerFromUrl(url);
 
   return (
     <a
       href={url}
       target="_blank"
       rel="noreferrer"
-      className="mt-2 p-3 rounded-lg border bg-background/50 flex items-center justify-between group/card hover:border-primary/50 transition-colors block no-underline"
+      className="mt-2 p-3 rounded-lg border bg-gradient-to-r from-background to-muted/30 flex items-center justify-between group/card hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/5 transition-all block no-underline"
     >
       <div className="flex items-center gap-3">
-        <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary font-bold text-lg">
-          $
-        </div>
-        <div>
-          <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
-            Bags.fm Token
+        <img
+          src="/bags-icon.png"
+          alt="Bags.fm"
+          className="h-10 w-10 rounded-full object-contain"
+        />
+        <div className="min-w-0">
+          <div className="flex items-center gap-2">
+            <span className="font-bold text-foreground text-lg">${ticker}</span>
           </div>
-          <div className="font-bold text-foreground">${ticker}</div>
+          <div className="text-xs text-muted-foreground">
+            View on Bags.fm
+          </div>
         </div>
       </div>
-      <div className="text-xs flex items-center gap-1 text-primary opacity-0 group-hover/card:opacity-100 transition-opacity">
-        View <ExternalLink className="h-3 w-3" />
+      <div className="text-xs flex items-center gap-1 text-emerald-500 opacity-0 group-hover/card:opacity-100 transition-opacity">
+        Open <ExternalLink className="h-3 w-3" />
       </div>
     </a>
   );
