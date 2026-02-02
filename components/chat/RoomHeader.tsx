@@ -51,11 +51,13 @@ export function RoomHeader({
             href="https://bags.fm/skill.md"
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary text-black text-sm font-medium hover:bg-primary/90 hover:shadow-[0_0_15px_rgba(0,214,43,0.5)] transition-all"
+            className="flex items-center gap-2 text-sm font-medium hover:opacity-80 transition-all"
           >
-            <img src="/bags-icon.png" alt="Bags.fm" className="h-4 w-4" />
-            Bags.fm Skill
-            <ExternalLink className="h-3 w-3" />
+            <img src="/bags-icon.png" alt="Bags.fm" className="h-6 w-6" />
+            <span className="px-3 py-1.5 rounded-full bg-primary text-black hover:shadow-[0_0_15px_rgba(0,214,43,0.5)] flex items-center gap-1.5">
+              Join Bags.fm
+              <ExternalLink className="h-3 w-3" />
+            </span>
           </a>
           <JoinDialog />
           {onlineCount > 0 && (
