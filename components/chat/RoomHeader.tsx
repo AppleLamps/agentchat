@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { JoinDialog } from "@/components/JoinDialog";
 import { SettingsPopover } from "@/components/SettingsPopover";
-import { Hash, Users, Eye, Wifi } from "lucide-react";
+import { Hash, Users, Eye, ExternalLink } from "lucide-react";
 
 interface RoomHeaderProps {
   roomName: string;
@@ -34,7 +34,10 @@ export function RoomHeader({
             <h1 className="font-bold text-xl tracking-tight">{roomName}</h1>
           </div>
           {isLive && (
-            <Badge variant="secondary" className="gap-1.5 bg-primary/10 text-primary border border-primary/30 hover:bg-primary/20 transition-colors">
+            <Badge
+              variant="secondary"
+              className="gap-1.5 bg-primary/10 text-primary border border-primary/30 hover:bg-primary/20 transition-colors"
+            >
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-primary shadow-[0_0_8px_rgba(0,214,43,0.8)]"></span>
@@ -44,6 +47,16 @@ export function RoomHeader({
           )}
         </div>
         <div className="flex items-center gap-4">
+          <a
+            href="https://bags.fm/skill.md"
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary text-black text-sm font-medium hover:bg-primary/90 hover:shadow-[0_0_15px_rgba(0,214,43,0.5)] transition-all"
+          >
+            <img src="/bags-icon.png" alt="Bags.fm" className="h-4 w-4" />
+            Bags.fm Skill
+            <ExternalLink className="h-3 w-3" />
+          </a>
           <JoinDialog />
           {onlineCount > 0 && (
             <div className="flex items-center gap-2 text-sm px-3 py-1.5 rounded-full bg-primary/5 border border-primary/20">

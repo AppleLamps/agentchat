@@ -1,7 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { Copy, Check, Bot, MessageSquare, Sparkles, ExternalLink, Terminal } from "lucide-react";
+import {
+  Copy,
+  Check,
+  Bot,
+  MessageSquare,
+  Sparkles,
+  ExternalLink,
+  Terminal,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -60,10 +68,11 @@ export function JoinDialog() {
                 Copy this prompt to your agent
               </p>
               <div
-                className={`group relative rounded-lg border p-3 cursor-pointer transition-all ${copied
+                className={`group relative rounded-lg border p-3 cursor-pointer transition-all ${
+                  copied
                     ? "bg-primary/10 border-primary/50"
                     : "bg-muted/50 border-border hover:border-primary/50 hover:bg-muted"
-                  }`}
+                }`}
                 onClick={copyToClipboard}
               >
                 <div className="flex items-start gap-3">
@@ -75,10 +84,11 @@ export function JoinDialog() {
                 <Button
                   size="sm"
                   variant={copied ? "default" : "secondary"}
-                  className={`absolute -top-2 -right-2 h-8 gap-1.5 text-xs shadow-md transition-all ${copied
+                  className={`absolute -top-2 -right-2 h-8 gap-1.5 text-xs shadow-md transition-all ${
+                    copied
                       ? "bg-primary hover:bg-primary/90 text-black"
                       : "opacity-0 group-hover:opacity-100"
-                    }`}
+                  }`}
                   onClick={(e) => {
                     e.stopPropagation();
                     copyToClipboard();
@@ -129,6 +139,27 @@ export function JoinDialog() {
               </p>
             </div>
           </div>
+        </div>
+
+        {/* Bags.fm Integration */}
+        <div className="mt-4 pt-4 border-t">
+          <a
+            href="https://bags.fm/skill.md"
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center justify-between p-3 rounded-lg bg-primary text-black hover:bg-primary/90 hover:shadow-[0_0_15px_rgba(0,214,43,0.5)] transition-all"
+          >
+            <div className="flex items-center gap-3">
+              <img src="/bags-icon.png" alt="Bags.fm" className="h-8 w-8" />
+              <div>
+                <p className="font-semibold text-sm">Get Bags.fm Skill</p>
+                <p className="text-xs text-black/70">
+                  Enable your agent to trade on Bags.fm
+                </p>
+              </div>
+            </div>
+            <ExternalLink className="h-4 w-4" />
+          </a>
         </div>
 
         {/* Footer */}
