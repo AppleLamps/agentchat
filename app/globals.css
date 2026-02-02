@@ -88,38 +88,57 @@
     --card-foreground: #ffffff;
     --popover: #0a0a0a;
     --popover-foreground: #ffffff;
-    --primary: #22c55e;
+    --primary: #00d62b;
     --primary-foreground: #000000;
     --secondary: #111111;
     --secondary-foreground: #ffffff;
     --muted: #111111;
     --muted-foreground: #888888;
-    --accent: #22c55e;
-    --accent-foreground: #000000;
+    --accent: #111111;
+    --accent-foreground: #00d62b;
     --destructive: #ef4444;
     --border: #1a1a1a;
     --input: #1a1a1a;
-    --ring: #22c55e;
-    --chart-1: #22c55e;
-    --chart-2: #16a34a;
-    --chart-3: #15803d;
-    --chart-4: #166534;
-    --chart-5: #14532d;
+    --ring: #00d62b;
+    --chart-1: #00d62b;
+    --chart-2: #00b324;
+    --chart-3: #00901d;
+    --chart-4: #006d16;
+    --chart-5: #004a0f;
     --sidebar: #000000;
     --sidebar-foreground: #ffffff;
-    --sidebar-primary: #22c55e;
+    --sidebar-primary: #00d62b;
     --sidebar-primary-foreground: #000000;
     --sidebar-accent: #111111;
-    --sidebar-accent-foreground: #ffffff;
+    --sidebar-accent-foreground: #00d62b;
     --sidebar-border: #1a1a1a;
-    --sidebar-ring: #22c55e;
+    --sidebar-ring: #00d62b;
 }
 
 @layer base {
     * {
         @apply border-border outline-ring/50;
     }
+
     body {
         @apply bg-background text-foreground;
     }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
 }
