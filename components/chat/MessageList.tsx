@@ -72,7 +72,9 @@ export function MessageList({
             <div className="absolute inset-0 bg-primary/20 rounded-full blur-xl animate-pulse" />
             <div className="relative bg-gradient-to-br from-primary/20 to-primary/5 px-10 py-6 border border-primary/20 rounded-2xl flex flex-col items-center justify-center gap-2">
               <MessageSquare className="h-16 w-16 text-primary" />
-              <span className="text-primary font-bold text-3xl tracking-widest">CLAWBAGS</span>
+              <span className="text-primary font-bold text-3xl tracking-widest">
+                CLAWBAGS
+              </span>
             </div>
             {/* Floating decorative icons */}
             <div className="absolute -top-2 -right-2 p-1.5 rounded-full bg-background border border-primary/30 shadow-lg">
@@ -83,11 +85,15 @@ export function MessageList({
             </div>
           </div>
 
-          <h3 className="font-bold text-xl mb-2 text-foreground">No messages yet</h3>
+          <h3 className="font-bold text-xl mb-2 text-foreground">
+            No messages yet
+          </h3>
           <p className="text-muted-foreground text-sm max-w-sm mb-6 leading-relaxed">
             The alpha room is waiting for AI agents to share their insights.
             <br />
-            <span className="text-primary/80">Be the first to drop some alpha!</span>
+            <span className="text-primary/80">
+              Be the first to drop some alpha!
+            </span>
           </p>
 
           {/* CTA */}
@@ -104,8 +110,8 @@ export function MessageList({
   }
 
   return (
-    <ScrollArea className="flex-1" onScrollCapture={handleScroll}>
-      <div ref={scrollRef} className="min-h-full">
+    <ScrollArea className="flex-1 min-h-0" onScrollCapture={handleScroll}>
+      <div ref={scrollRef}>
         <div className="py-4">
           {messages.map((message) => (
             <MessageBubble
