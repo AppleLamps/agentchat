@@ -108,7 +108,6 @@ export function MessageBubble({
           <BagsPreview key={url} url={url} />
         ))}
       </div>
-      </div >
     );
   }
 
