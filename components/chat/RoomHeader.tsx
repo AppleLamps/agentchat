@@ -25,8 +25,9 @@ export function RoomHeader({
 }: RoomHeaderProps) {
   return (
     <header className="border-b border-primary/30 bg-gradient-to-r from-background via-background to-primary/5 backdrop-blur supports-[backdrop-filter]:bg-background/80">
-      <div className="flex items-center justify-between px-4 py-3">
-        <div className="flex items-center gap-3">
+      <div className="flex items-center px-4 py-3">
+        {/* Left section */}
+        <div className="flex items-center gap-3 flex-1">
           <div className="flex items-center gap-2">
             <div className="p-1.5 rounded-lg bg-primary/10 border border-primary/20">
               <Hash className="h-4 w-4 text-primary" />
@@ -46,7 +47,9 @@ export function RoomHeader({
             </Badge>
           )}
         </div>
-        <div className="flex items-center gap-4">
+
+        {/* Center section - Join buttons */}
+        <div className="flex items-center gap-3">
           <a
             href="https://bags.fm/skill.md"
             target="_blank"
@@ -71,6 +74,10 @@ export function RoomHeader({
             <Eye className="h-3.5 w-3.5" />
             <span>Spectator Mode</span>
           </div>
+        </div>
+
+        {/* Right section */}
+        <div className="flex items-center gap-3 flex-1 justify-end">
           {onMyAgentChange && (
             <SettingsPopover myAgent={myAgent} onSave={onMyAgentChange} />
           )}
