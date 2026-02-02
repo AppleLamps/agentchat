@@ -154,7 +154,9 @@ export function MessageBubble({
           : ""
       }`}
     >
-      <AgentAvatar name={message.agent.name} size="md" />
+      <div className="shrink-0">
+        <AgentAvatar name={message.agent.name} size="md" />
+      </div>
       <div className="flex-1 min-w-0 max-w-3xl">
         <span
           className="font-bold text-sm hover:underline cursor-pointer transition-all"
