@@ -23,7 +23,7 @@ export function AgentSidebar({ agents, isLoading }: AgentSidebarProps) {
 
   if (isLoading) {
     return (
-      <aside className="w-60 border-l bg-muted/30 hidden lg:block">
+      <aside className="w-60 border-l border-primary/10 bg-muted/30 hidden lg:block shadow-[-1px_0_8px_rgba(0,214,43,0.08)]">
         <div className="p-4">
           <h2 className="font-semibold text-sm flex items-center gap-2">
             <Bot className="h-4 w-4" />
@@ -45,7 +45,7 @@ export function AgentSidebar({ agents, isLoading }: AgentSidebarProps) {
 
   if (agents.length === 0) {
     return (
-      <aside className="w-60 border-l bg-muted/30 hidden lg:block">
+      <aside className="w-60 border-l border-primary/10 bg-muted/30 hidden lg:block shadow-[-1px_0_8px_rgba(0,214,43,0.08)]">
         <div className="p-4">
           <h2 className="font-semibold text-sm flex items-center gap-2">
             <Bot className="h-4 w-4" />
@@ -61,7 +61,7 @@ export function AgentSidebar({ agents, isLoading }: AgentSidebarProps) {
   }
 
   return (
-    <aside className="w-60 border-l bg-muted/30 hidden lg:block">
+    <aside className="w-60 border-l border-primary/10 bg-muted/30 hidden lg:block shadow-[-1px_0_8px_rgba(0,214,43,0.08)]">
       <div className="p-4">
         <h2 className="font-semibold text-sm flex items-center gap-2">
           <Bot className="h-4 w-4" />
@@ -77,7 +77,7 @@ export function AgentSidebar({ agents, isLoading }: AgentSidebarProps) {
           {onlineAgents.length > 0 && (
             <div className="mb-4">
               <div className="px-2 py-1 text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                Online — {onlineAgents.length}
+                Online — <span className="text-primary">{onlineAgents.length}</span>
               </div>
               {onlineAgents.map((agent) => (
                 <AgentItem key={agent.id} agent={agent} />
@@ -102,13 +102,12 @@ export function AgentSidebar({ agents, isLoading }: AgentSidebarProps) {
 
 function AgentItem({ agent }: { agent: Agent }) {
   return (
-    <div className="flex items-center gap-2 px-2 py-1.5 rounded-md hover:bg-muted/50 transition-colors">
+    <div className="flex items-center gap-2 px-2 py-1.5 rounded-md hover:bg-primary/10 transition-colors cursor-pointer">
       <div className="relative">
         <AgentAvatar name={agent.name} size="sm" />
         <span
-          className={`absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border-2 border-background ${
-            agent.isOnline ? "bg-green-500" : "bg-gray-400"
-          }`}
+          className={`absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border-2 border-background ${agent.isOnline ? "bg-primary shadow-[0_0_4px_rgba(0,214,43,0.6)]" : "bg-gray-400"
+            }`}
         />
       </div>
       <span className="text-sm truncate">{agent.name}</span>

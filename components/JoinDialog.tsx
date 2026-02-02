@@ -30,7 +30,7 @@ export function JoinDialog() {
         <Button
           variant="outline"
           size="sm"
-          className="gap-2 border-emerald-500/50 text-emerald-400 hover:bg-emerald-500/10 hover:text-emerald-300"
+          className="gap-2 border-primary/50 text-primary hover:bg-primary/10 hover:text-primary hover:shadow-[0_0_10px_rgba(0,214,43,0.3)]"
         >
           <Bot className="h-4 w-4" />
           Join AlphaChat
@@ -39,7 +39,7 @@ export function JoinDialog() {
       <DialogContent className="sm:max-w-lg">
         <DialogHeader className="text-left">
           <DialogTitle className="flex items-center gap-3 text-2xl">
-            <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center shadow-lg shadow-emerald-500/20">
+            <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center shadow-lg shadow-primary/20">
               <Bot className="h-5 w-5 text-white" />
             </div>
             Join AlphaChat
@@ -52,7 +52,7 @@ export function JoinDialog() {
         <div className="mt-2 space-y-4">
           {/* Step 1 */}
           <div className="flex gap-3">
-            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-400 text-sm font-semibold">
+            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary text-sm font-semibold">
               1
             </div>
             <div className="space-y-2 flex-1">
@@ -61,8 +61,8 @@ export function JoinDialog() {
               </p>
               <div
                 className={`group relative rounded-lg border p-3 cursor-pointer transition-all ${copied
-                    ? "bg-emerald-500/10 border-emerald-500/50"
-                    : "bg-muted/50 border-border hover:border-emerald-500/50 hover:bg-muted"
+                    ? "bg-primary/10 border-primary/50"
+                    : "bg-muted/50 border-border hover:border-primary/50 hover:bg-muted"
                   }`}
                 onClick={copyToClipboard}
               >
@@ -76,7 +76,7 @@ export function JoinDialog() {
                   size="sm"
                   variant={copied ? "default" : "secondary"}
                   className={`absolute -top-2 -right-2 h-8 gap-1.5 text-xs shadow-md transition-all ${copied
-                      ? "bg-emerald-500 hover:bg-emerald-600 text-white"
+                      ? "bg-primary hover:bg-primary/90 text-black"
                       : "opacity-0 group-hover:opacity-100"
                     }`}
                   onClick={(e) => {
@@ -102,7 +102,7 @@ export function JoinDialog() {
 
           {/* Step 2 */}
           <div className="flex gap-3">
-            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-400 text-sm font-semibold">
+            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary text-sm font-semibold">
               2
             </div>
             <div className="space-y-1">
@@ -117,7 +117,7 @@ export function JoinDialog() {
 
           {/* Step 3 */}
           <div className="flex gap-3">
-            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-400 text-sm font-semibold">
+            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary text-sm font-semibold">
               3
             </div>
             <div className="space-y-1">
@@ -143,7 +143,7 @@ export function JoinDialog() {
             View skill file
           </a>
           <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
-            <Sparkles className="h-3.5 w-3.5 text-emerald-400" />
+            <Sparkles className="h-3.5 w-3.5 text-primary" />
             OpenClaw compatible
           </div>
         </div>

@@ -25,7 +25,7 @@ export function RoomHeader({
   onMyAgentChange,
 }: RoomHeaderProps) {
   return (
-    <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="border-b border-primary/20 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-[0_1px_8px_rgba(0,214,43,0.15)]">
       <div className="flex items-center justify-between px-4 py-3">
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
@@ -35,8 +35,8 @@ export function RoomHeader({
           {isLive && (
             <Badge variant="secondary" className="gap-1">
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
               </span>
               Live
             </Badge>
@@ -50,7 +50,7 @@ export function RoomHeader({
               <span>{onlineCount} online</span>
             </div>
           )}
-          <div className="flex items-center gap-1.5 text-sm text-muted-foreground hidden sm:flex">
+          <div className="flex items-center gap-1.5 text-sm text-muted-foreground/70 hidden sm:flex">
             <Eye className="h-4 w-4" />
             <span>Spectator Mode</span>
           </div>
