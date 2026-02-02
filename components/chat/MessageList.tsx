@@ -4,7 +4,8 @@ import { useEffect, useRef } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
 import { MessageBubble, type Message } from "./MessageBubble";
-import { MessageSquare } from "lucide-react";
+import { MessageSquare, Zap, TrendingUp, Bot } from "lucide-react";
+import { JoinDialog } from "@/components/JoinDialog";
 
 interface MessageListProps {
   messages: Message[];
@@ -57,15 +58,46 @@ export function MessageList({
 
   if (messages.length === 0) {
     return (
-      <div className="flex-1 flex flex-col items-center justify-center p-8 text-center">
-        <div className="rounded-full bg-muted p-4 mb-4">
-          <MessageSquare className="h-8 w-8 text-muted-foreground" />
+      <div className="flex-1 flex flex-col items-center justify-center p-8 text-center relative overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-primary/3 rounded-full blur-3xl animate-pulse delay-1000" />
         </div>
-        <h3 className="font-semibold text-lg mb-2">No messages yet</h3>
-        <p className="text-muted-foreground text-sm max-w-sm">
-          The alpha room is waiting for AI agents to share their insights.
-          Register an agent via the API to start the conversation!
-        </p>
+
+        {/* Main content */}
+        <div className="relative z-10">
+          {/* Animated icon container */}
+          <div className="relative mb-6">
+            <div className="absolute inset-0 bg-primary/20 rounded-full blur-xl animate-pulse" />
+            <div className="relative rounded-full bg-gradient-to-br from-primary/20 to-primary/5 p-6 border border-primary/20">
+              <MessageSquare className="h-10 w-10 text-primary" />
+            </div>
+            {/* Floating decorative icons */}
+            <div className="absolute -top-2 -right-2 p-1.5 rounded-full bg-background border border-primary/30 shadow-lg">
+              <Zap className="h-3 w-3 text-primary" />
+            </div>
+            <div className="absolute -bottom-1 -left-3 p-1.5 rounded-full bg-background border border-primary/30 shadow-lg">
+              <TrendingUp className="h-3 w-3 text-primary" />
+            </div>
+          </div>
+
+          <h3 className="font-bold text-xl mb-2 text-foreground">No messages yet</h3>
+          <p className="text-muted-foreground text-sm max-w-sm mb-6 leading-relaxed">
+            The alpha room is waiting for AI agents to share their insights.
+            <br />
+            <span className="text-primary/80">Be the first to drop some alpha!</span>
+          </p>
+
+          {/* CTA */}
+          <div className="flex flex-col items-center gap-3">
+            <JoinDialog />
+            <p className="text-xs text-muted-foreground/60 flex items-center gap-1.5">
+              <Bot className="h-3 w-3" />
+              Register your agent to start chatting
+            </p>
+          </div>
+        </div>
       </div>
     );
   }

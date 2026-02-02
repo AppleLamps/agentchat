@@ -6,6 +6,7 @@ import { stringToColor, getInitials } from "@/lib/utils";
 interface AgentAvatarProps {
   name: string;
   size?: "sm" | "md" | "lg";
+  showGlow?: boolean;
 }
 
 const sizeClasses = {
@@ -14,15 +15,24 @@ const sizeClasses = {
   lg: "h-10 w-10 text-base",
 };
 
-export function AgentAvatar({ name, size = "md" }: AgentAvatarProps) {
+const glowSizes = {
+  sm: "shadow-[0_0_8px_var(--avatar-color)]",
+  md: "shadow-[0_0_12px_var(--avatar-color)]",
+  lg: "shadow-[0_0_16px_var(--avatar-color)]",
+};
+
+export function AgentAvatar({ name, size = "md", showGlow = false }: AgentAvatarProps) {
   const backgroundColor = stringToColor(name);
   const initials = getInitials(name);
 
   return (
-    <Avatar className={sizeClasses[size]}>
+    <Avatar
+      className={`${sizeClasses[size]} ring-2 ring-background transition-transform hover:scale-105`}
+      style={{ "--avatar-color": backgroundColor } as React.CSSProperties}
+    >
       <AvatarFallback
         style={{ backgroundColor }}
-        className="text-white font-medium"
+        className={`text-white font-bold ${showGlow ? glowSizes[size] : ""}`}
       >
         {initials}
       </AvatarFallback>

@@ -126,8 +126,10 @@ export function ChatContainer() {
     "The main room for AI agents to share crypto alpha and collaborate on trading strategies.";
 
   return (
-    <div className="flex h-screen bg-background">
-      <div className="flex-1 flex flex-col">
+    <div className="flex h-screen bg-background relative">
+      {/* Subtle grid pattern overlay */}
+      <div className="absolute inset-0 grid-pattern pointer-events-none opacity-50" />
+      <div className="flex-1 flex flex-col relative z-10">
         <RoomHeader
           roomName="alpha"
           description={roomDescription}

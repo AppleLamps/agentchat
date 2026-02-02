@@ -1,11 +1,10 @@
 "use client";
 
 import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { JoinDialog } from "@/components/JoinDialog";
 import { SettingsPopover } from "@/components/SettingsPopover";
-import { Hash, Users, Eye } from "lucide-react";
+import { Hash, Users, Eye, Wifi } from "lucide-react";
 
 interface RoomHeaderProps {
   roomName: string;
@@ -25,18 +24,20 @@ export function RoomHeader({
   onMyAgentChange,
 }: RoomHeaderProps) {
   return (
-    <header className="border-b border-primary/20 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-[0_1px_8px_rgba(0,214,43,0.15)]">
+    <header className="border-b border-primary/30 bg-gradient-to-r from-background via-background to-primary/5 backdrop-blur supports-[backdrop-filter]:bg-background/80">
       <div className="flex items-center justify-between px-4 py-3">
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
-            <Hash className="h-5 w-5 text-muted-foreground" />
-            <h1 className="font-bold text-lg">{roomName}</h1>
+            <div className="p-1.5 rounded-lg bg-primary/10 border border-primary/20">
+              <Hash className="h-4 w-4 text-primary" />
+            </div>
+            <h1 className="font-bold text-xl tracking-tight">{roomName}</h1>
           </div>
           {isLive && (
-            <Badge variant="secondary" className="gap-1">
+            <Badge variant="secondary" className="gap-1.5 bg-primary/10 text-primary border border-primary/30 hover:bg-primary/20 transition-colors">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary shadow-[0_0_8px_rgba(0,214,43,0.8)]"></span>
               </span>
               Live
             </Badge>
@@ -45,13 +46,14 @@ export function RoomHeader({
         <div className="flex items-center gap-4">
           <JoinDialog />
           {onlineCount > 0 && (
-            <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
-              <Users className="h-4 w-4" />
-              <span>{onlineCount} online</span>
+            <div className="flex items-center gap-2 text-sm px-3 py-1.5 rounded-full bg-primary/5 border border-primary/20">
+              <Users className="h-4 w-4 text-primary" />
+              <span className="text-foreground font-medium">{onlineCount}</span>
+              <span className="text-muted-foreground">online</span>
             </div>
           )}
-          <div className="flex items-center gap-1.5 text-sm text-muted-foreground/70 hidden sm:flex">
-            <Eye className="h-4 w-4" />
+          <div className="flex items-center gap-1.5 text-xs text-muted-foreground/60 hidden sm:flex px-2 py-1 rounded-md bg-muted/50">
+            <Eye className="h-3.5 w-3.5" />
             <span>Spectator Mode</span>
           </div>
           {onMyAgentChange && (
@@ -61,12 +63,9 @@ export function RoomHeader({
         </div>
       </div>
       {description && (
-        <>
-          <Separator />
-          <div className="px-4 py-2 text-sm text-muted-foreground">
-            {description}
-          </div>
-        </>
+        <div className="px-4 py-2.5 text-sm text-muted-foreground border-t border-primary/10 bg-gradient-to-r from-transparent via-primary/5 to-transparent">
+          {description}
+        </div>
       )}
     </header>
   );
