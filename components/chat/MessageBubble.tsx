@@ -81,6 +81,10 @@ function extractBagsLinks(content: string): string[] {
   return matches ? [...new Set(matches)] : [];
 }
 
+function stripBagsLinks(content: string): string {
+  return content.replace(BAGS_FM_REGEX, "").trim();
+}
+
 export interface Message {
   id: string;
   content: string;
@@ -106,6 +110,10 @@ export function MessageBubble({
   const relativeTime = formatDistanceToNow(timestamp, { addSuffix: true });
   const agentColor = stringToColor(message.agent.name);
 
+  const bagsLinks = extractBagsLinks(message.content);
+  const displayContent =
+    bagsLinks.length > 0 ? stripBagsLinks(message.content) : message.content;
+
   if (isOwnMessage) {
     return (
       <div
@@ -114,25 +122,25 @@ export function MessageBubble({
         }`}
       >
         <div className="max-w-[70%] flex flex-col items-end">
-          <span
-            className="font-semibold text-sm mb-1"
-            style={{ color: agentColor }}
-          >
-            {message.agent.name}
-          </span>
+          <div className="flex items-center gap-2 mb-1">
+            <span className="text-[10px] text-muted-foreground/60 font-mono">
+              {relativeTime}
+            </span>
+            <span
+              className="font-semibold text-sm"
+              style={{ color: agentColor }}
+            >
+              {message.agent.name}
+            </span>
+          </div>
           <div className="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground rounded-2xl rounded-tr-sm px-4 py-3 shadow-[0_0_20px_rgba(0,214,43,0.3)]">
             <div className="text-sm prose prose-sm prose-invert max-w-none prose-p:my-1 prose-ul:my-1 prose-ol:my-1 prose-li:my-0 prose-pre:my-2 prose-code:text-xs prose-code:bg-black/20 prose-code:px-1 prose-code:py-0.5 prose-code:rounded">
               <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                {message.content}
+                {displayContent}
               </ReactMarkdown>
             </div>
-            <div className="mt-1 flex justify-end select-none">
-              <span className="text-[10px] text-primary-foreground/70 font-mono">
-                {relativeTime}
-              </span>
-            </div>
           </div>
-          {extractBagsLinks(message.content).map((url) => (
+          {bagsLinks.map((url) => (
             <BagsPreview key={url} url={url} messageContent={message.content} />
           ))}
         </div>
@@ -157,18 +165,16 @@ export function MessageBubble({
           >
             {message.agent.name}
           </span>
+          <span className="text-[10px] text-muted-foreground/60 font-mono">
+            {relativeTime}
+          </span>
         </div>
         <div className="mt-1 text-sm text-foreground prose prose-sm dark:prose-invert max-w-none prose-p:my-1 prose-ul:my-1 prose-ol:my-1 prose-li:my-0 prose-pre:my-2 prose-code:text-xs prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:rounded">
           <ReactMarkdown remarkPlugins={[remarkGfm]}>
-            {message.content}
+            {displayContent}
           </ReactMarkdown>
-          <div className="mt-1 flex justify-end select-none">
-            <span className="text-[10px] text-muted-foreground/60 font-mono">
-              {relativeTime}
-            </span>
-          </div>
         </div>
-        {extractBagsLinks(message.content).map((url) => (
+        {bagsLinks.map((url) => (
           <BagsPreview key={url} url={url} messageContent={message.content} />
         ))}
       </div>
